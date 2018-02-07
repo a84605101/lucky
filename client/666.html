@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <title>666啊</title>
+
+    
+    <link href="img/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <style>
+        .main {
+            padding: 20px;
+        }
+        .item {
+            margin-bottom: 30px;
+        }
+        input {
+            display: block;
+            height: 30px;
+            padding: 0 10px;
+            margin-top: 20px;
+
+        }
+        button {
+            margin-top: 20px;
+            display: block;
+            width: 120px;
+            height: 40px;
+            line-height: 40px;
+            border: none;
+            background-color: #3196c9;
+            color: #fff;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="item">
+        <button onclick="go()">GO GO GO!</button>
+    </div>
+    <div class="item">
+        <label>
+            下一个是谁？（两位数）
+            <input type="tel">
+        </label>
+        <button onclick="doIt()">开始套路</button>
+    </div>
+    <div class="item">
+        <label>
+            没谁的事儿？（两位数）
+            <input type="tel">
+        </label>
+        <button onclick="doIt2()">开始套路</button>
+    </div>
+
+    <div class="item">
+        <label>
+            想干啥就干啥
+            <input type="text">
+        </label>
+        <button onclick="doIt3()">开始套路</button>
+    </div>
+
+    <div class="item">        
+        <button onclick="goBack()">马上跑路</button>
+    </div>
+
+
+
+
+
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    function go() {
+        var url = "http://test.emooc.com:54321/control?control=1&script=page.toggleStatus()";
+        $.ajax({
+            url: url,
+            success: function (result) {
+
+            },
+            error: function () {
+                alert("套路失败，服务停了");
+            }
+        });
+    }
+
+    function doIt() {
+        var num = parseInt($("input").eq(0).val());
+        if (num && num > 0 && num < 100) {
+            $.ajax({
+                url: "http://test.emooc.com:54321/control?control=1&script=page.setNextNum(" + num + ")",
+                success: function (result) {
+                    alert(result.msg || "666");
+                },
+                error: function () {
+                    alert("套路失败，服务停了");
+                }
+            })
+        }
+        else {
+            alert("套路失败，输入错误");
+        }
+    }
+
+    function doIt2() {
+        var num = parseInt($("input").eq(1).val());
+        if (num && num > 0 && num < 100) {
+            $.ajax({
+                url: "http://test.emooc.com:54321/control?control=1&script=page.addHistory(" + num + ")",
+                success: function (result) {
+                    alert(result.msg || "666");
+                },
+                error: function () {
+                    alert("套路失败，服务停了");
+                }
+            })
+        }
+        else {
+            alert("套路失败，输入错误");
+        }
+    }
+
+    function doIt3() {
+        var text = $("input").eq(2).val();
+        var url = "http://test.emooc.com:54321/control?control=1&script=";
+        url += encodeURIComponent(text);
+        $.ajax({
+            url: url,
+            success: function (result) {
+                alert(result.msg || "666");
+            },
+            error: function () {
+                alert("套路失败，服务停了");
+            }
+        });
+    }
+
+    function goBack() {
+        var url = "http://test.emooc.com:54321/control?control=1&script=";
+        url += encodeURIComponent('location.href="index.html"');
+        $.ajax({
+            url: url,
+            success: function (result) {
+                alert(result.msg || "666");
+            },
+            error: function () {
+                alert("套路失败，服务停了");
+            }
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head lang="zh-CN">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="renderer" content="webkit">
+    <title>控制器</title>
+
+    
+    <link href="img/favicon.ico" type="image/x-icon" rel="shortcut icon">
+    <style>
+        html,body {
+            height: 100%;
+            margin: 0;
+            overflow: hidden;
+
+        }
+        .main {
+            height: 100%;
+            display: -webkit-flex;
+            display: flex;
+            background-color: #e7342f;
+        }
+        .item {
+            color: #F9CB3A;
+            font-size: 80px;
+            font-weight: bold;
+            margin: auto;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            border: 20px solid #F9CB3A;
+            text-align: center;
+            line-height: 180px;
+            animation: heart 3s;
+            animation-timing-function: ease-in-out;
+            animation-iteration-count: infinite;
+
+        }
+
+        @keyframes heart
+        {
+            0%   {transform: translate(0,0) scale(1); }
+            50%  {transform: translate(0,-5%) scale(1.1); }
+            100% {transform: translate(0,0) scale(1);}
+        }
+
+    </style>
+</head>
+<body>
+<div class="main">
+    <div class="item" onclick="go()">
+        GO
+    </div>
+</div>
+</body>
+<script src="js/jquery-1.11.3.min.js"></script>
+<script>
+    function go() {
+        var url = "http://127.0.0.1:54321/control?control=1&script=page.toggleStatus()";
+        $.ajax({
+            url: url,
+            success: function (result) {
+
+            },
+            error: function () {
+                alert("服务停了");
+            }
+        });
+    }
+</script>
+</html>
